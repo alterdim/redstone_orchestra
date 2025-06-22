@@ -1,5 +1,7 @@
 package com.alternis.redstone_orchestra;
 
+import com.alternis.redstone_orchestra.block.JarBlock;
+import com.alternis.redstone_orchestra.block.JarBlockEntity;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
@@ -10,6 +12,8 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.api.distmarker.Dist;
@@ -32,22 +36,32 @@ import org.slf4j.Logger;
 @Mod(RedstoneOrchestra.MODID)
 public class RedstoneOrchestra
 {
-    // Define mod id in a common place for everything to reference
+
     public static final String MODID = "redstone_orchestra";
-    // Directly reference a slf4j logger
+
     private static final Logger LOGGER = LogUtils.getLogger();
-    // Create a Deferred Register to hold Blocks which will all be registered under the "redstone_orchestra" namespace
+
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-    // Create a Deferred Register to hold Items which will all be registered under the "redstone_orchestra" namespace
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "redstone_orchestra" namespace
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     // Creates a new Block with the id "redstone_orchestra:example_block", combining the namespace and path
     public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
-    // Creates a new BlockItem with the id "redstone_orchestra:example_block", combining the namespace and path
-    public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Block> JAR_BLOCK = BLOCKS.register("jar_block",
+            () -> new JarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
 
+    public static final RegistryObject<BlockEntityType<JarBlockEntity>> JAR_BLOCK_ENTITY = BLOCK_ENTITIES.register(
+            "jar_block_entity",
+            () -> BlockEntityType.Builder.of(JarBlockEntity::new, JAR_BLOCK.get()).build(null)
+    );
+
+
+    // Creates a new BlockItem with the id "redstone_orchestra:example_block", combining the namespace and path
+
+
+    public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> JAR_BLOCK_ITEM = ITEMS.register("jar_block", () -> new BlockItem(JAR_BLOCK.get(), new Item.Properties()));
     // Creates a new food item with the id "redstone_orchestra:example_id", nutrition 1 and saturation 2
     public static final RegistryObject<Item> EXAMPLE_ITEM = ITEMS.register("example_item", () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
             .alwaysEat().nutrition(1).saturationMod(2f).build())));
@@ -73,6 +87,7 @@ public class RedstoneOrchestra
         ITEMS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
+        BLOCK_ENTITIES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -101,7 +116,9 @@ public class RedstoneOrchestra
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
-            event.accept(EXAMPLE_BLOCK_ITEM);
+        {
+            event.accept(JAR_BLOCK_ITEM);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
