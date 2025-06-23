@@ -1,0 +1,21 @@
+package com.alternis.redstone_orchestra.data;
+
+import com.alternis.redstone_orchestra.util.reward.Reward;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+
+import java.util.List;
+import java.util.Map;
+
+/** One melody + its emotion cost + a reward. */
+public record Song(
+        List<Integer> pattern,
+        Map<String, Integer> cost,
+        List<Reward> rewards) {
+
+    public static final Codec<Song> CODEC = RecordCodecBuilder.create(i -> i.group(
+            Codec.INT.listOf()                           .fieldOf("pattern").forGetter(Song::pattern),
+            Codec.unboundedMap(Codec.STRING, Codec.INT)  .fieldOf("cost")   .forGetter(Song::cost),
+            Reward.CODEC.listOf()                        .fieldOf("rewards").forGetter(Song::rewards)
+    ).apply(i, Song::new));
+}
