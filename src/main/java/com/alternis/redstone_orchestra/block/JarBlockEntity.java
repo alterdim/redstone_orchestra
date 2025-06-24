@@ -6,6 +6,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -110,5 +111,36 @@ public class JarBlockEntity extends BlockEntity {
                 }
             }
         }
+    }
+
+    public static JarBlockEntity findJarSameChunk(ServerPlayer player) {
+
+        var chunk = player.level().getChunkAt(player.blockPosition());   // loaded chunk
+        for (BlockEntity be : chunk.getBlockEntities().values()) {
+            if (be instanceof JarBlockEntity jar) return jar;
+        }
+        return null;
+    }
+
+    /* ------------------------------------------------------------------
+     * Attempt to pay the requested emotion cost from the given jar.
+     * ► Returns TRUE and subtracts the counts atomically if affordable.
+     * ► Returns FALSE and leaves the jar unchanged if any emotion short.
+     * ------------------------------------------------------------------ */
+    public boolean tryPay(EnumMap<Emotion,Integer> price) {
+
+        // ---------- 1) check affordability ---------- //
+        for (Map.Entry<Emotion,Integer> need : price.entrySet()) {
+            int have = counts.getOrDefault(need.getKey(), 0);
+            if (have < need.getValue()) return false;      // cannot afford
+        }
+
+        // ---------- 2) subtract / persist ---------- //
+        for (Map.Entry<Emotion,Integer> need : price.entrySet()) {
+            counts.merge(need.getKey(), -need.getValue(), Integer::sum);
+        }
+        setChanged();   // mark BE dirty so it saves to NBT
+
+        return true;
     }
 }

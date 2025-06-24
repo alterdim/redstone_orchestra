@@ -4,7 +4,6 @@ import com.alternis.redstone_orchestra.RedstoneOrchestra;
 import com.alternis.redstone_orchestra.data.Song;
 import com.alternis.redstone_orchestra.block.JarBlockEntity;
 import com.alternis.redstone_orchestra.init.ModDatapackRegistries;
-import com.alternis.redstone_orchestra.util.JarUtils;
 import com.alternis.redstone_orchestra.util.Emotion;
 import com.alternis.redstone_orchestra.util.reward.Reward;
 import com.cstav.genshinstrument.event.NoteSoundPlayedEvent;
@@ -61,14 +60,14 @@ public final class InstrumentPatternListener {
 
             if (!endsWith(buf, song.pattern())) continue;              // no match
 
-            JarBlockEntity jar = JarUtils.findJarSameChunk(player);
+            JarBlockEntity jar = JarBlockEntity.findJarSameChunk(player);
             if (jar == null) {
                 player.sendSystemMessage(RedstoneOrchestra.text(
                         "No emotion jar nearby!", ChatFormatting.GRAY));
                 continue;
             }
 
-            if (!JarUtils.tryPay(jar, toEnumMap(song.cost()))) {
+            if (!jar.tryPay(toEnumMap(song.cost()))) {
                 player.sendSystemMessage(RedstoneOrchestra.text(
                         "Not enough emotions!", ChatFormatting.DARK_RED));
                 continue;
