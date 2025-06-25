@@ -1,7 +1,0 @@
-{
-  "pattern": [1, 2, 3],
-  "cost": { "joy": 1 },
-  "rewards": [
-    { "type": "command", "commands": [ "say It works!" ] }
-  ]
-}

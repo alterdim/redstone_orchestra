@@ -1,5 +1,6 @@
 package com.alternis.redstone_orchestra.block;
 
+import com.alternis.redstone_orchestra.item.HeartItem;
 import com.alternis.redstone_orchestra.util.Emotion;
 import com.cstav.genshinstrument.event.InstrumentPlayedEvent;
 import com.mojang.logging.LogUtils;
@@ -16,19 +17,23 @@ import org.slf4j.Logger;
 import java.util.*;
 
 import static com.alternis.redstone_orchestra.RedstoneOrchestra.JAR_BLOCK_ENTITY;
+import static com.alternis.redstone_orchestra.RedstoneOrchestra.ZOMBIE_HEART_ITEM;
 
 public class JarBlockEntity extends BlockEntity {
 
-    private static final int MAX_TOTAL = 64;   // cap, optional
+    private int size = 0;   // cap, optional
+    private HeartItem currentHeart; // the heart that is currently being used to pay
     private final EnumMap<Emotion, Integer> counts = new EnumMap<>(Emotion.class);
     static final Logger LOGGER = LogUtils.getLogger();
 
-    public JarBlockEntity(BlockPos pos, BlockState state) {
+    public JarBlockEntity(BlockPos pos, BlockState state)
+    {
         super(JAR_BLOCK_ENTITY.get(), pos, state);
         LOGGER.info("new blockEntity");
     }
 
     public void onInstrumentPlayed(InstrumentPlayedEvent event) {
+        LOGGER.info("trying to add emotion");
         add(Emotion.ANGER, 1);
 
     }
@@ -52,7 +57,10 @@ public class JarBlockEntity extends BlockEntity {
     /** @return true if the jar could accept the quantity */
     public boolean add(Emotion e, int qty) {
         if (qty <= 0) return false;
-        if (getTotal() + qty > MAX_TOTAL) return false;
+        if (getTotal() + qty > size) {
+            LOGGER.info("Too full ! Size: {}, Adding: {}, Total: {}", size, qty, getTotal() + qty);
+            return false;
+        }
 
         counts.merge(e, qty, Integer::sum);
         onChanged();
@@ -92,6 +100,8 @@ public class JarBlockEntity extends BlockEntity {
             emotionsTag.putInt(entry.getKey().name(), entry.getValue());
         }
         tag.put("Emotions", emotionsTag);
+        tag.putInt("size", size);
+        tag.putInt("heart", currentHeart != null ? currentHeart.getPower() : 0);
     }
 
     @Override
@@ -99,6 +109,12 @@ public class JarBlockEntity extends BlockEntity {
         super.load(tag);
 
         counts.clear(); // just in case
+
+        currentHeart = tag.getInt("heart") > 0
+                ? (HeartItem) ZOMBIE_HEART_ITEM.get()
+                : null;
+        size = tag.getInt("size");
+
         if (tag.contains("Emotions", Tag.TAG_COMPOUND)) {
             CompoundTag emotionsTag = tag.getCompound("Emotions");
             for (String key : emotionsTag.getAllKeys()) {
@@ -113,6 +129,10 @@ public class JarBlockEntity extends BlockEntity {
         }
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public static JarBlockEntity findJarSameChunk(ServerPlayer player) {
 
         var chunk = player.level().getChunkAt(player.blockPosition());   // loaded chunk
@@ -120,6 +140,13 @@ public class JarBlockEntity extends BlockEntity {
             if (be instanceof JarBlockEntity jar) return jar;
         }
         return null;
+    }
+
+    public void setCurrentHeart(HeartItem heart) {
+        this.currentHeart = heart;
+        this.size = heart.getPower();
+        LOGGER.info("Current heart set to: {}", heart.getDescriptionId());
+        onChanged();
     }
 
     /* ------------------------------------------------------------------
@@ -139,7 +166,7 @@ public class JarBlockEntity extends BlockEntity {
         for (Map.Entry<Emotion,Integer> need : price.entrySet()) {
             counts.merge(need.getKey(), -need.getValue(), Integer::sum);
         }
-        setChanged();   // mark BE dirty so it saves to NBT
+        onChanged();   // mark BE dirty so it saves to NBT
 
         return true;
     }
