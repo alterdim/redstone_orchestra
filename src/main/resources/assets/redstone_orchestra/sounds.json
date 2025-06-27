@@ -1,0 +1,86 @@
+{
+  "triangle_note_0": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/0"]
+  },
+  "triangle_note_1": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/1"]
+  },
+  "triangle_note_2": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/2"]
+  },
+  "triangle_note_3": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/3"]
+  },
+  "triangle_note_4": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/4"]
+  },
+  "triangle_note_5": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/5"]
+  },
+  "triangle_note_6": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/6"]
+  },
+  "triangle_note_7": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/7"]
+  },
+  "triangle_note_8": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/8"]
+  },
+  "triangle_note_9": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/9"]
+  },
+  "triangle_note_10": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/10"]
+  },
+  "triangle_note_11": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/11"]
+  },
+  "triangle_note_12": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/12"]
+  },
+  "triangle_note_13": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/13"]
+  },
+  "triangle_note_14": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/14"]
+  },
+  "triangle_note_15": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/15"]
+  },
+  "triangle_note_16": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/16"]
+  },
+  "triangle_note_17": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/17"]
+  },
+  "triangle_note_18": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/18"]
+  },
+  "triangle_note_19": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/19"]
+  },
+  "triangle_note_20": {
+    "category": "record",
+    "sounds": ["redstone_orchestra:triangle/20"]
+  }
+}

@@ -2,7 +2,10 @@ package com.alternis.redstone_orchestra;
 
 import com.alternis.redstone_orchestra.block.JarBlock;
 import com.alternis.redstone_orchestra.block.JarBlockEntity;
+import com.alternis.redstone_orchestra.block.instrument.triangle.TriangleBlock;
+import com.alternis.redstone_orchestra.block.instrument.triangle.TriangleBlockEntity;
 import com.alternis.redstone_orchestra.data.Song;
+import com.alternis.redstone_orchestra.init.ModSounds;
 import com.alternis.redstone_orchestra.item.HeartItem;
 import com.mojang.logging.LogUtils;
 import net.minecraft.ChatFormatting;
@@ -69,9 +72,18 @@ public class RedstoneOrchestra
     public static final RegistryObject<Block> JAR_BLOCK = BLOCKS.register("jar_block",
             () -> new JarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
 
+    public static final RegistryObject<Block> TRIANGLE_BLOCK = BLOCKS.register("triangle_block",
+            () -> new TriangleBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
+
+    // BLOCK ENTITY REGISTRATION
     public static final RegistryObject<BlockEntityType<JarBlockEntity>> JAR_BLOCK_ENTITY = BLOCK_ENTITIES.register(
             "jar_block_entity",
             () -> BlockEntityType.Builder.of(JarBlockEntity::new, JAR_BLOCK.get()).build(null)
+    );
+
+    public static final RegistryObject<BlockEntityType<TriangleBlockEntity>> TRIANGLE_BLOCK_ENTITY = BLOCK_ENTITIES.register(
+            "triangle_block_entity",
+            () -> BlockEntityType.Builder.of(TriangleBlockEntity::new, TRIANGLE_BLOCK.get()).build(null)
     );
 
 
@@ -80,6 +92,7 @@ public class RedstoneOrchestra
 
     public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> JAR_BLOCK_ITEM = ITEMS.register("jar_block", () -> new BlockItem(JAR_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> TRIANGLE_BLOCK_ITEM = ITEMS.register("triangle_block", () -> new BlockItem(TRIANGLE_BLOCK.get(), new Item.Properties()));
     // Creates a new food item with the id "redstone_orchestra:example_id", nutrition 1 and saturation 2
     public static final RegistryObject<Item> EXAMPLE_ITEM = ITEMS.register("example_item", () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
             .alwaysEat().nutrition(1).saturationMod(2f).build())));
@@ -93,6 +106,7 @@ public class RedstoneOrchestra
                 output.accept(EXAMPLE_ITEM.get());
                 output.accept(ZOMBIE_HEART_ITEM.get());
                 output.accept(JAR_BLOCK_ITEM.get());
+                output.accept(TRIANGLE_BLOCK_ITEM.get());
                 // Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());
 
@@ -110,6 +124,8 @@ public class RedstoneOrchestra
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
         BLOCK_ENTITIES.register(modEventBus);
+
+        ModSounds.register(modEventBus);
 
 
         // Register ourselves for server and other game events we are interested in
