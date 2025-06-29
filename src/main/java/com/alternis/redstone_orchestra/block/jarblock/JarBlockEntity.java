@@ -9,9 +9,12 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
 import java.util.*;
@@ -34,12 +37,17 @@ public class JarBlockEntity extends BlockEntity {
     public void onInstrumentPlayed(InstrumentPlayedEvent event) {
         LOGGER.info("trying to add emotion");
         add(Emotion.ANGER, 1);
+        add(Emotion.SADNESS, 1);
+        add(Emotion.JOY, 1);
 
     }
 
     /* ---------- querying ---------- */
 
-    public int get(Emotion e)                   { return counts.getOrDefault(e, 0); }
+    public int get(Emotion e)                   {
+        System.out.println(counts);
+        return counts.getOrDefault(e, 0);
+    }
     public int getTotal()                      { return counts.values().stream().mapToInt(Integer::intValue).sum(); }
 
     public boolean has(Emotion e, int qty)      { return get(e) >= qty; }
@@ -56,7 +64,7 @@ public class JarBlockEntity extends BlockEntity {
     /** @return true if the jar could accept the quantity */
     public boolean add(Emotion e, int qty) {
         if (qty <= 0) return false;
-        if (getTotal() + qty > size) {
+        if (get(e) >= size) {
             LOGGER.info("Too full ! Size: {}, Adding: {}, Total: {}", size, qty, getTotal() + qty);
             return false;
         }
@@ -101,6 +109,23 @@ public class JarBlockEntity extends BlockEntity {
         tag.put("Emotions", emotionsTag);
         tag.putInt("size", size);
         tag.putInt("heart", currentHeart != null ? currentHeart.getPower() : 0);
+    }
+
+    @Override
+    public @NotNull CompoundTag getUpdateTag() {
+        CompoundTag tag = new CompoundTag();
+        saveAdditional(tag); // saves counts, size, etc.
+        return tag;
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag) {
+        load(tag); // reload counts from tag
     }
 
     @Override
