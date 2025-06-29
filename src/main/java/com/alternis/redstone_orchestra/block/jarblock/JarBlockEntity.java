@@ -1,5 +1,7 @@
-package com.alternis.redstone_orchestra.block;
-
+package com.alternis.redstone_orchestra.block.jarblock;
+import static com.alternis.redstone_orchestra.block.ModBlockEntities.JAR_BLOCK_ENTITY;
+import static com.alternis.redstone_orchestra.block.ModBlocks.RECEPTACLE_BLOCK;
+import static com.alternis.redstone_orchestra.item.ModItems.ZOMBIE_HEART_ITEM;
 import com.alternis.redstone_orchestra.item.HeartItem;
 import com.alternis.redstone_orchestra.util.Emotion;
 import com.cstav.genshinstrument.event.InstrumentPlayedEvent;
@@ -9,15 +11,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.slf4j.Logger;
 
 import java.util.*;
 
-import static com.alternis.redstone_orchestra.RedstoneOrchestra.JAR_BLOCK_ENTITY;
-import static com.alternis.redstone_orchestra.RedstoneOrchestra.ZOMBIE_HEART_ITEM;
+
 
 public class JarBlockEntity extends BlockEntity {
 
@@ -169,5 +168,33 @@ public class JarBlockEntity extends BlockEntity {
         onChanged();   // mark BE dirty so it saves to NBT
 
         return true;
+    }
+
+    public List<BlockPos> findReceptacles() {
+        List<BlockPos> receptacles = new ArrayList<>();
+        if (level == null) return receptacles;
+
+        // search for up to 8 catalyst blocks in a 3x3x3 area around the jar
+        int radius = 2;
+        for (int x = -radius; x <= radius; x++) {
+            for (int y = -radius; y <= radius; y++) {
+                for (int z = -radius; z <= radius; z++) {
+                    BlockPos pos = worldPosition.offset(x, y, z);
+                    BlockState state = level.getBlockState(pos);
+                    if (state.getBlock().equals(RECEPTACLE_BLOCK.get()) ) {
+                        receptacles.add(pos);
+                        if (receptacles.size() >= 8) {
+                            return receptacles; // found enough receptacles
+                        }
+                    }
+                }
+            }
+        }
+        if (receptacles.isEmpty()) {
+            LOGGER.warn("No receptacles found in the vicinity of JarBlockEntity at {}", worldPosition);
+        } else {
+            LOGGER.info("Found {} receptacles near JarBlockEntity at {}", receptacles.size(), worldPosition);
+        }
+        return receptacles;
     }
 }

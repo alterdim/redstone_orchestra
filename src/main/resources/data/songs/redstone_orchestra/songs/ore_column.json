@@ -1,8 +1,8 @@
 {
-  "pattern": [1, 2, 3],
+  "pattern": [1, 2, 5],
   "cost": { "anger": 1 },
   "allowed_instruments": ["redstone_orchestra:triangle"],
   "rewards": [
-    { "type": "command", "commands": [ "say It works!" ] }
+    { "type": "special_effect", "effects": ["ore_column"] }
   ]
 }

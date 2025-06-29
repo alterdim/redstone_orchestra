@@ -2,7 +2,7 @@ package com.alternis.redstone_orchestra.event;
 
 import com.alternis.redstone_orchestra.RedstoneOrchestra;
 import com.alternis.redstone_orchestra.data.Song;
-import com.alternis.redstone_orchestra.block.JarBlockEntity;
+import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
 import com.alternis.redstone_orchestra.init.ModDatapackRegistries;
 import com.alternis.redstone_orchestra.util.Emotion;
 import com.alternis.redstone_orchestra.util.reward.Reward;
@@ -50,15 +50,15 @@ public final class InstrumentPatternListener {
         buf.addLast(ev.sound().index);
         while (buf.size() > WINDOW) buf.removeFirst();
 
+        String instrument_name = ev.soundMeta().instrumentId().toString();
+
         /* ---------------- iterate over all songs ---------------------- */
         Registry<Song> songs = player.level()
                 .registryAccess()
                 .registryOrThrow(ModDatapackRegistries.SONGS);
 
         for (Song song : songs) {
-            RedstoneOrchestra.LOGGER.error(song.toString());
-
-            if (!endsWith(buf, song.pattern())) continue;              // no match
+            if (!endsWith(buf, song.pattern()) || !song.allowedInstruments().contains(instrument_name)) continue;              // no match
 
             JarBlockEntity jar = JarBlockEntity.findJarSameChunk(player);
             if (jar == null) {

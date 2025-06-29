@@ -11,11 +11,13 @@ import java.util.Map;
 public record Song(
         List<Integer> pattern,
         Map<String, Integer> cost,
+        List<String> allowedInstruments,
         List<Reward> rewards) {
 
     public static final Codec<Song> CODEC = RecordCodecBuilder.create(i -> i.group(
             Codec.INT.listOf()                           .fieldOf("pattern").forGetter(Song::pattern),
             Codec.unboundedMap(Codec.STRING, Codec.INT)  .fieldOf("cost")   .forGetter(Song::cost),
+            Codec.STRING.listOf()                        .fieldOf("allowed_instruments").forGetter(Song::allowedInstruments),
             Reward.CODEC.listOf()                        .fieldOf("rewards").forGetter(Song::rewards)
     ).apply(i, Song::new));
 }

@@ -1,4 +1,4 @@
-package com.alternis.redstone_orchestra.block;
+package com.alternis.redstone_orchestra.block.jarblock;
 
 import com.alternis.redstone_orchestra.RedstoneOrchestra;
 import com.alternis.redstone_orchestra.item.HeartItem;
@@ -14,10 +14,9 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 import org.jetbrains.annotations.Nullable;
 
-import static com.alternis.redstone_orchestra.RedstoneOrchestra.ZOMBIE_HEART_ITEM;
+import static com.alternis.redstone_orchestra.item.ModItems.ZOMBIE_HEART_ITEM;
 
 public class JarBlock extends Block implements EntityBlock {
     public JarBlock(Properties p_49795_) {

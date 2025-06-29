@@ -1,7 +1,7 @@
 package com.alternis.redstone_orchestra.event;
 
 import com.alternis.redstone_orchestra.RedstoneOrchestra;
-import com.alternis.redstone_orchestra.block.JarBlockEntity;
+import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
 import com.alternis.redstone_orchestra.init.ModDatapackRegistries;
 import com.cstav.genshinstrument.event.InstrumentPlayedEvent;
 import com.cstav.genshinstrument.event.NoteSoundPlayedEvent;

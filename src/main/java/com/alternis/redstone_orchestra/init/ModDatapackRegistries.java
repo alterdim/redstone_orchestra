@@ -10,6 +10,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DataPackRegistryEvent;
 
+import static com.alternis.redstone_orchestra.RedstoneOrchestra.LOGGER;
+
 @Mod.EventBusSubscriber(modid = RedstoneOrchestra.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ModDatapackRegistries {
 
@@ -20,6 +22,7 @@ public final class ModDatapackRegistries {
     @SubscribeEvent
     public static void newRegistry(DataPackRegistryEvent.NewRegistry e) {
         e.dataPackRegistry(SONGS, Song.CODEC);
+        LOGGER.warn("Registered new datapack registry: {}", e.toString());
     }
 
 }
