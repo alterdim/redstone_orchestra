@@ -1,13 +1,16 @@
 package com.alternis.redstone_orchestra.event;
 
 import com.alternis.redstone_orchestra.RedstoneOrchestra;
+import com.alternis.redstone_orchestra.block.instrument.LinkableInstrumentBlock;
 import com.alternis.redstone_orchestra.data.Song;
 import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
 import com.alternis.redstone_orchestra.init.ModDatapackRegistries;
 import com.alternis.redstone_orchestra.util.Emotion;
+import com.alternis.redstone_orchestra.util.notesource.NoteSource;
 import com.alternis.redstone_orchestra.util.reward.Reward;
 import com.cstav.genshinstrument.event.NoteSoundPlayedEvent;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -27,9 +30,7 @@ public final class InstrumentPatternListener {
 
     /** How many recent notes we keep per player. */
     private static final int WINDOW = 16;
-
-    /** rolling buffers keyed by player UUID */
-    private static final Map<UUID, ArrayDeque<Integer>> NOTE_CACHE = new HashMap<>();
+    private static final Map<String, ArrayDeque<Integer>> NOTE_CACHE = new HashMap<>();
 
     /** ---------------------------------------------------------------- */
     /** MAIN EVENT HANDLER                                               */
@@ -43,9 +44,13 @@ public final class InstrumentPatternListener {
         /* only handle player-played notes */
         if (!(ev.entityInfo().get().entity instanceof ServerPlayer player)) return;
 
+        NoteSource source = NoteSource.from(ev);
+        String key = NoteSource.toKey(source);
+
+
         /* ---------------- push note into that player's queue ---------- */
-        ArrayDeque<Integer> buf = NOTE_CACHE.computeIfAbsent(player.getUUID(),
-                id -> new ArrayDeque<>(WINDOW));
+        ArrayDeque<Integer> buf = NOTE_CACHE.computeIfAbsent(key,
+                k -> new ArrayDeque<>(WINDOW));
 
         buf.addLast(ev.sound().index);
         while (buf.size() > WINDOW) buf.removeFirst();
@@ -74,7 +79,7 @@ public final class InstrumentPatternListener {
             }
 
             /* ---------------- pattern + payment succeeded ------------- */
-            applyReward(song, player);
+            applyReward(song, source);
             spawnSuccessParticles(player);
             buf.clear();                       // optional: reset after success
             break;                             // one song per keystroke
@@ -96,9 +101,9 @@ public final class InstrumentPatternListener {
         return true;
     }
 
-    private static void applyReward(Song song, ServerPlayer player) {
+    private static void applyReward(Song song, NoteSource source) {
         for (Reward reward : song.rewards()) {
-            reward.grant(player, player.serverLevel());
+            reward.grant(source);
         }
     }
 

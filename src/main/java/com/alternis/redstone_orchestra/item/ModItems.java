@@ -11,7 +11,10 @@ import static com.alternis.redstone_orchestra.RedstoneOrchestra.MODID;
 public class ModItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+
     public static final RegistryObject<Item> ZOMBIE_HEART_ITEM = ITEMS.register("zombie_heart", () -> new HeartItem(new Item.Properties(), 5));
+
+    public static final RegistryObject<Item> CONDUCTING_BATON = ITEMS.register("conducting_baton", () -> new ConductingBaton(new Item.Properties()));
 
     public static void register(final IEventBus bus) {
         ITEMS.register(bus);

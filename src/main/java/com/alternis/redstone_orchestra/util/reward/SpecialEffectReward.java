@@ -1,6 +1,7 @@
 package com.alternis.redstone_orchestra.util.reward;
 
 import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
+import com.alternis.redstone_orchestra.util.notesource.NoteSource;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -25,20 +26,20 @@ public record SpecialEffectReward(List<String> effects) implements Reward {
 
     @Override public String type() { return "special_effect"; }
 
-    @Override public void grant(ServerPlayer p, ServerLevel lvl) {
+    @Override
+    public void grant(NoteSource source) {
         for (String effect : effects())
         {
             switch (effect) {
-                case "ore_column" -> stoneColumn(p, lvl);
+                case "ore_column" -> stoneColumn(source.jar(), source.serverLevel());
                 default -> Log.warn("Unknown special effect: " + effect);
             }
         }
     }
 
     // TIER 4
-    private void stoneColumn(ServerPlayer p, ServerLevel lvl) {
+    private void stoneColumn(JarBlockEntity jar, ServerLevel lvl) {
 
-        JarBlockEntity jar = JarBlockEntity.findJarSameChunk(p);
         if (jar != null) {
             List<BlockPos> receptacles = jar.findReceptacles();
             if (receptacles.isEmpty()) {}

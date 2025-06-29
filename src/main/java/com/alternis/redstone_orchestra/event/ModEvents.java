@@ -22,7 +22,7 @@ public class ModEvents {
         if (event.level().isClientSide()) return;
         if (event.isByEntity())
         {
-            InstrumentPlayedEvent.EntityInfo info = (InstrumentPlayedEvent.EntityInfo) event.entityInfo().get();
+            InstrumentPlayedEvent<NoteSound>.EntityInfo info = event.entityInfo().get();
             NoteSound note = event.sound();
             Logger.getAnonymousLogger().log(Level.INFO, "InstrumentPlayedEvent: InstrumentPlayedEvent.NoteIdentifier: {0}", note.index);
 
@@ -34,9 +34,6 @@ public class ModEvents {
                 }
             }
         }
-
-
-        // Iterate over blocks in the chunk
 
     }
 

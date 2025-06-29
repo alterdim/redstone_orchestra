@@ -1,5 +1,6 @@
 package com.alternis.redstone_orchestra.util.reward;
 
+import com.alternis.redstone_orchestra.util.notesource.NoteSource;
 import com.mojang.serialization.Codec;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,7 +18,9 @@ public record EmotionReward(Map<String, Integer> emotions) implements Reward {
 
     @Override public String type() { return "emotion"; }
 
-    @Override public void grant(ServerPlayer p, ServerLevel lvl) {
-        //emotions.forEach((emo, val) -> ModStats.get(p).addEmotion(emo, val));
+    @Override
+    public void grant(NoteSource source) {
+        //TODO
     }
+
 }

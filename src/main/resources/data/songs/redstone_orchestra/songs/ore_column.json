@@ -1,7 +1,7 @@
 {
   "pattern": [1, 2, 5],
   "cost": { "anger": 1 },
-  "allowed_instruments": ["redstone_orchestra:triangle"],
+  "allowed_instruments": ["redstone_orchestra:triangle", "genshinstrument:vintage_lyre"],
   "rewards": [
     { "type": "special_effect", "effects": ["ore_column"] }
   ]

@@ -37,6 +37,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
 import static com.alternis.redstone_orchestra.block.ModBlocks.*;
+import static com.alternis.redstone_orchestra.item.ModItems.CONDUCTING_BATON;
 import static com.alternis.redstone_orchestra.item.ModItems.ZOMBIE_HEART_ITEM;
 
 @Mod(RedstoneOrchestra.MODID)
@@ -51,16 +52,22 @@ public class RedstoneOrchestra
             .icon(() -> JAR_BLOCK_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(ZOMBIE_HEART_ITEM.get());
+                output.accept(CONDUCTING_BATON.get());
                 output.accept(JAR_BLOCK_ITEM.get());
                 output.accept(TRIANGLE_BLOCK_ITEM.get());
                 output.accept(RECEPTACLE_BLOCK_ITEM.get());
+                output.accept(CATALYST_BLOCK_ITEM.get());
+
             }).build());
+
+
 
     public RedstoneOrchestra(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();
 
         modEventBus.addListener(this::commonSetup);
+
 
         ModItems.register(modEventBus);
         ModBlockEntities.register(modEventBus);
