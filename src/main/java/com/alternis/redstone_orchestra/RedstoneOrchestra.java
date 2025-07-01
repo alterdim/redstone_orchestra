@@ -58,6 +58,7 @@ public class RedstoneOrchestra
 
                 // INSTRUMENTS
                 output.accept(TRIANGLE_BLOCK_ITEM.get());
+                output.accept(ELECTRIC_GUITAR_BLOCK_ITEM.get());
 
                 // UTIL BLOCKS
                 output.accept(JAR_BLOCK_ITEM.get());

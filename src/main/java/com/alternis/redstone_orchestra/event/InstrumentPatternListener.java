@@ -15,6 +15,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -69,7 +70,24 @@ public final class InstrumentPatternListener {
             if (jar == null) {
                 player.sendSystemMessage(RedstoneOrchestra.text(
                         "No emotion jar nearby!", ChatFormatting.GRAY));
-                continue;
+                return;
+            }
+
+
+
+            /* ---------------- pattern + payment succeeded ------------- */
+            for (Reward reward : song.rewards()) {
+                if (!reward.canGrant(source)) {
+                    player.sendSystemMessage(RedstoneOrchestra.text(
+                            "The notes got lost ...",
+                            ChatFormatting.DARK_RED));
+                    // play failure sound
+                    player.playNotifySound(
+                            SoundEvents.ANVIL_DESTROY,
+                            player.getSoundSource(),
+                            1.0f, 1.0f);
+                    return;
+                }
             }
 
             if (!jar.tryPay(toEnumMap(song.cost()))) {
@@ -78,15 +96,7 @@ public final class InstrumentPatternListener {
                 continue;
             }
 
-            /* ---------------- pattern + payment succeeded ------------- */
-            for (Reward reward : song.rewards()) {
-                if (!reward.canGrant(source)) {
-                    player.sendSystemMessage(RedstoneOrchestra.text(
-                            "Cannot grant reward: " + reward.type(),
-                            ChatFormatting.DARK_RED));
-                    break;
-                }
-            }
+            player.sendSystemMessage(RedstoneOrchestra.text("HIIII", ChatFormatting.GOLD));
             applyReward(song, source);
             spawnSuccessParticles(player);
             buf.clear();                       // optional: reset after success

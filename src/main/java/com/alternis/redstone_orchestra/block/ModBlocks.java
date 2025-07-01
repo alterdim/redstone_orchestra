@@ -1,6 +1,7 @@
 package com.alternis.redstone_orchestra.block;
 
 import com.alternis.redstone_orchestra.RedstoneOrchestra;
+import com.alternis.redstone_orchestra.block.instrument.electric_guitar.ElectricGuitarBlock;
 import com.alternis.redstone_orchestra.block.instrument.triangle.TriangleBlock;
 import com.alternis.redstone_orchestra.block.jarblock.JarBlock;
 import net.minecraft.world.item.BlockItem;
@@ -26,6 +27,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> TRIANGLE_BLOCK =
             registerBlock("triangle_block", () -> new TriangleBlock(defaultProps()));
 
+    public static final RegistryObject<Block> ELECTRIC_GUITAR_BLOCK =
+            registerBlock("electric_guitar_block", () -> new ElectricGuitarBlock(defaultProps()));
+
+
     public static final RegistryObject<Block> RECEPTACLE_BLOCK =
             registerBlock("receptacle_block", () -> new Block(defaultProps()));
 
@@ -37,7 +42,10 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Item> JAR_BLOCK_ITEM = registerBlockItem(JAR_BLOCK);
+
     public static final RegistryObject<Item> TRIANGLE_BLOCK_ITEM = registerBlockItem(TRIANGLE_BLOCK);
+    public static final RegistryObject<Item> ELECTRIC_GUITAR_BLOCK_ITEM = registerBlockItem(ELECTRIC_GUITAR_BLOCK);
+
     public static final RegistryObject<Item> RECEPTACLE_BLOCK_ITEM = registerBlockItem(RECEPTACLE_BLOCK);
     public static final RegistryObject<Item> CATALYST_BLOCK_ITEM = registerBlockItem(CATALYST_BLOCK);
     public static final RegistryObject<Item> AMP_BLOCK_ITEM = registerBlockItem(AMP_BLOCK);

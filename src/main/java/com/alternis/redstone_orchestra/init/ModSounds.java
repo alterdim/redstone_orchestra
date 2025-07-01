@@ -17,7 +17,8 @@ public abstract class ModSounds {
     }
 
     public static final NoteSound[]
-            TRIANGLE = nsr(loc("triangle")).registerGrid();
+            TRIANGLE = nsr(loc("triangle")).registerGrid(),
+            ELECTRIC_GUITAR = nsr(loc("electric_guitar")).registerGrid();
 
     private static NoteSoundRegistrar nsr(ResourceLocation instrumentId) {
         return new NoteSoundRegistrar(ModSounds.SOUNDS, instrumentId);

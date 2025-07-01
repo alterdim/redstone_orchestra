@@ -1,5 +1,6 @@
 package com.alternis.redstone_orchestra.client;
 import com.alternis.redstone_orchestra.RedstoneOrchestra;
+import com.alternis.redstone_orchestra.client.gui.ElectricGuitarScreen;
 import com.alternis.redstone_orchestra.client.gui.TriangleScreen;
 import com.cstav.genshinstrument.client.gui.screen.instrument.InstrumentScreenRegistry;
 import com.cstav.genshinstrument.client.gui.screen.instrument.partial.InstrumentScreen;
@@ -19,7 +20,8 @@ public class ClientInitializer {
 
 
     private static final Map<ResourceLocation, Supplier<? extends InstrumentScreen>> INSTRUMENTS = Map.of(
-            TriangleScreen.INSTRUMENT_ID, TriangleScreen::new
+            TriangleScreen.INSTRUMENT_ID, TriangleScreen::new,
+            ElectricGuitarScreen.INSTRUMENT_ID, ElectricGuitarScreen::new
     );
 
     @SubscribeEvent

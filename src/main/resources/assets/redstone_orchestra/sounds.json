@@ -1,86 +1,254 @@
 {
   "triangle_note_0": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/0"]
+    "sounds": [
+      "redstone_orchestra:triangle/0"
+    ]
   },
   "triangle_note_1": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/1"]
+    "sounds": [
+      "redstone_orchestra:triangle/1"
+    ]
   },
   "triangle_note_2": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/2"]
+    "sounds": [
+      "redstone_orchestra:triangle/2"
+    ]
   },
   "triangle_note_3": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/3"]
+    "sounds": [
+      "redstone_orchestra:triangle/3"
+    ]
   },
   "triangle_note_4": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/4"]
+    "sounds": [
+      "redstone_orchestra:triangle/4"
+    ]
   },
   "triangle_note_5": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/5"]
+    "sounds": [
+      "redstone_orchestra:triangle/5"
+    ]
   },
   "triangle_note_6": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/6"]
+    "sounds": [
+      "redstone_orchestra:triangle/6"
+    ]
   },
   "triangle_note_7": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/7"]
+    "sounds": [
+      "redstone_orchestra:triangle/7"
+    ]
   },
   "triangle_note_8": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/8"]
+    "sounds": [
+      "redstone_orchestra:triangle/8"
+    ]
   },
   "triangle_note_9": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/9"]
+    "sounds": [
+      "redstone_orchestra:triangle/9"
+    ]
   },
   "triangle_note_10": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/10"]
+    "sounds": [
+      "redstone_orchestra:triangle/10"
+    ]
   },
   "triangle_note_11": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/11"]
+    "sounds": [
+      "redstone_orchestra:triangle/11"
+    ]
   },
   "triangle_note_12": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/12"]
+    "sounds": [
+      "redstone_orchestra:triangle/12"
+    ]
   },
   "triangle_note_13": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/13"]
+    "sounds": [
+      "redstone_orchestra:triangle/13"
+    ]
   },
   "triangle_note_14": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/14"]
+    "sounds": [
+      "redstone_orchestra:triangle/14"
+    ]
   },
   "triangle_note_15": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/15"]
+    "sounds": [
+      "redstone_orchestra:triangle/15"
+    ]
   },
   "triangle_note_16": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/16"]
+    "sounds": [
+      "redstone_orchestra:triangle/16"
+    ]
   },
   "triangle_note_17": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/17"]
+    "sounds": [
+      "redstone_orchestra:triangle/17"
+    ]
   },
   "triangle_note_18": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/18"]
+    "sounds": [
+      "redstone_orchestra:triangle/18"
+    ]
   },
   "triangle_note_19": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/19"]
+    "sounds": [
+      "redstone_orchestra:triangle/19"
+    ]
   },
   "triangle_note_20": {
     "category": "record",
-    "sounds": ["redstone_orchestra:triangle/20"]
+    "sounds": [
+      "redstone_orchestra:triangle/20"
+    ]
+  },
+  "electric_guitar_note_0": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/0"
+    ]
+  },
+  "electric_guitar_note_1": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/1"
+    ]
+  },
+  "electric_guitar_note_2": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/2"
+    ]
+  },
+  "electric_guitar_note_3": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/3"
+    ]
+  },
+  "electric_guitar_note_4": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/4"
+    ]
+  },
+  "electric_guitar_note_5": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/5"
+    ]
+  },
+  "electric_guitar_note_6": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/6"
+    ]
+  },
+  "electric_guitar_note_7": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/7"
+    ]
+  },
+  "electric_guitar_note_8": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/8"
+    ]
+  },
+  "electric_guitar_note_9": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/9"
+    ]
+  },
+  "electric_guitar_note_10": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/10"
+    ]
+  },
+  "electric_guitar_note_11": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/11"
+    ]
+  },
+  "electric_guitar_note_12": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/12"
+    ]
+  },
+  "electric_guitar_note_13": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/13"
+    ]
+  },
+  "electric_guitar_note_14": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/14"
+    ]
+  },
+  "electric_guitar_note_15": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/15"
+    ]
+  },
+  "electric_guitar_note_16": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/16"
+    ]
+  },
+  "electric_guitar_note_17": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/17"
+    ]
+  },
+  "electric_guitar_note_18": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/18"
+    ]
+  },
+  "electric_guitar_note_19": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/19"
+    ]
+  },
+  "electric_guitar_note_20": {
+    "category": "record",
+    "sounds": [
+      "redstone_orchestra:electric_guitar/20"
+    ]
   }
 }
