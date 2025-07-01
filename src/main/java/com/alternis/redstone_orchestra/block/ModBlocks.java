@@ -32,11 +32,15 @@ public class ModBlocks {
     public static final RegistryObject<Block> CATALYST_BLOCK =
             registerBlock("catalyst_block", () -> new Block(defaultProps()));
 
+    public static final RegistryObject<Block> AMP_BLOCK =
+            registerBlock("amp_block", () -> new Block(defaultProps()));
+
 
     public static final RegistryObject<Item> JAR_BLOCK_ITEM = registerBlockItem(JAR_BLOCK);
     public static final RegistryObject<Item> TRIANGLE_BLOCK_ITEM = registerBlockItem(TRIANGLE_BLOCK);
     public static final RegistryObject<Item> RECEPTACLE_BLOCK_ITEM = registerBlockItem(RECEPTACLE_BLOCK);
     public static final RegistryObject<Item> CATALYST_BLOCK_ITEM = registerBlockItem(CATALYST_BLOCK);
+    public static final RegistryObject<Item> AMP_BLOCK_ITEM = registerBlockItem(AMP_BLOCK);
 
 
     private static <T extends Block> RegistryObject<Block> registerBlock(String name, Supplier<T> supplier) {

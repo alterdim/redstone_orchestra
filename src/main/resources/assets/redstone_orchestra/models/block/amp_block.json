@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "redstone_orchestra:block/amp_block",
+    "side": "redstone_orchestra:block/amp_block_side"
+  }
+}

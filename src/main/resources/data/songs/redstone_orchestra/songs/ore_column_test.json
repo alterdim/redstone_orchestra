@@ -1,0 +1,17 @@
+{
+  "pattern": [0, 1, 2],
+  "cost": { "anger": 1 },
+  "allowed_instruments": ["redstone_orchestra:triangle"],
+  "rewards": [
+    {
+      "type": "ore_column",
+      "blocks": [
+        "minecraft:emerald_ore",
+        "minecraft:lapis_ore"
+      ],
+      "min_height": 2,
+      "max_height": 6
+    }
+
+  ]
+}

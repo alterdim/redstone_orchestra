@@ -3,6 +3,6 @@
   "cost": { "anger": 1 },
   "allowed_instruments": ["redstone_orchestra:triangle"],
   "rewards": [
-    { "type": "recipe", "inputs" : [{ "id": "minecraft:iron_ingot", "Count": 3 }], "outputs": [{ "id": "minecraft:stick", "Count": 3 }], "count": 1}
+    { "type": "recipe", "inputs" : [{ "id": "minecraft:iron_ingot", "Count": 1 }], "outputs": [{ "id": "minecraft:stick", "Count": 3 }], "count": 1}
   ]
 }

@@ -79,6 +79,14 @@ public final class InstrumentPatternListener {
             }
 
             /* ---------------- pattern + payment succeeded ------------- */
+            for (Reward reward : song.rewards()) {
+                if (!reward.canGrant(source)) {
+                    player.sendSystemMessage(RedstoneOrchestra.text(
+                            "Cannot grant reward: " + reward.type(),
+                            ChatFormatting.DARK_RED));
+                    break;
+                }
+            }
             applyReward(song, source);
             spawnSuccessParticles(player);
             buf.clear();                       // optional: reset after success

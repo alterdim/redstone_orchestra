@@ -37,8 +37,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
 import static com.alternis.redstone_orchestra.block.ModBlocks.*;
-import static com.alternis.redstone_orchestra.item.ModItems.CONDUCTING_BATON;
-import static com.alternis.redstone_orchestra.item.ModItems.ZOMBIE_HEART_ITEM;
+import static com.alternis.redstone_orchestra.item.ModItems.*;
 
 @Mod(RedstoneOrchestra.MODID)
 public class RedstoneOrchestra
@@ -51,12 +50,20 @@ public class RedstoneOrchestra
     public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("ro_tab", () -> CreativeModeTab.builder()
             .icon(() -> JAR_BLOCK_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
+                // ITEMS
                 output.accept(ZOMBIE_HEART_ITEM.get());
                 output.accept(CONDUCTING_BATON.get());
-                output.accept(JAR_BLOCK_ITEM.get());
+                output.accept(MUSICAL_POWDER.get());
+
+
+                // INSTRUMENTS
                 output.accept(TRIANGLE_BLOCK_ITEM.get());
+
+                // UTIL BLOCKS
+                output.accept(JAR_BLOCK_ITEM.get());
                 output.accept(RECEPTACLE_BLOCK_ITEM.get());
                 output.accept(CATALYST_BLOCK_ITEM.get());
+                output.accept(AMP_BLOCK_ITEM.get());
 
             }).build());
 

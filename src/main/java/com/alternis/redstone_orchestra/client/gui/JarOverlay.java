@@ -49,24 +49,27 @@ public class JarOverlay {
         int sadness_count = jar.get(Emotion.SADNESS);
         int joy_count = jar.get(Emotion.JOY);
 
-        if (anger_count >= 0)
+        // This is kind of ugly. But I do not recommend trying to refactor.
+        // It breaks everything, and I have no clue why. maybe some fightin with y, who knows.
+
+        if (anger_count > 0)
         {
-            String anger_text = anger_count > 0 ? String.format(Locale.ROOT, "%d", anger_count) : "0";
+            String anger_text = String.format(Locale.ROOT, "%d", anger_count);
             gui.blit(ANGER_ICON, x, y, 0, 0, 16, 16, 16, 16);
             gui.drawString(mc.font, anger_text, x + 18, y + 4, 0xFFFFFF, true);
             y += 20;
         }
 
-        if (sadness_count >= 0)
+        if (sadness_count > 0)
         {
-            String sadness_text = sadness_count > 0 ? String.format(Locale.ROOT, "%d", sadness_count) : "0";
+            String sadness_text = String.format(Locale.ROOT, "%d", sadness_count);
             gui.blit(SAD_ICON, x, y, 0, 0, 16, 16, 16, 16);
             gui.drawString(mc.font, sadness_text, x + 18, y + 4, 0xFFFFFF, true);
             y += 20;
         }
-        if (joy_count >= 0)
+        if (joy_count > 0)
         {
-            String joy_text = joy_count > 0 ? String.format(Locale.ROOT, "%d", joy_count) : "0";
+            String joy_text = String.format(Locale.ROOT, "%d", joy_count);
             gui.blit(JOY_ICON, x, y, 0, 0, 16, 16, 16, 16);
             gui.drawString(mc.font, joy_text, x + 18, y + 4, 0xFFFFFF, true);
             y += 20;

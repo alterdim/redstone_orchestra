@@ -15,6 +15,7 @@ import org.jline.utils.Log;
 import java.util.List;
 
 import static com.alternis.redstone_orchestra.RedstoneOrchestra.LOGGER;
+import static com.alternis.redstone_orchestra.block.ModBlocks.RECEPTACLE_BLOCK;
 import static net.minecraft.world.level.block.Blocks.*;
 
 public record SpecialEffectReward(List<String> effects) implements Reward {
@@ -41,7 +42,7 @@ public record SpecialEffectReward(List<String> effects) implements Reward {
     private void stoneColumn(JarBlockEntity jar, ServerLevel lvl) {
 
         if (jar != null) {
-            List<BlockPos> receptacles = jar.findReceptacles();
+            List<BlockPos> receptacles = jar.findBlocksAround(RECEPTACLE_BLOCK.get(), 3, 2);
             if (receptacles.isEmpty()) {}
             else  {
                 for (BlockPos receptacle : receptacles) {
