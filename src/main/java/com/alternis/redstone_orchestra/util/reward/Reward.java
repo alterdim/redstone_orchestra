@@ -4,7 +4,7 @@ import com.alternis.redstone_orchestra.util.notesource.NoteSource;
 import com.mojang.serialization.Codec;
 
 /* Reward.java ------------------------------------------------------------- */
-public sealed interface Reward permits CommandReward, EmotionReward, RecipeReward, SpecialEffectReward, OreColumnReward {
+public sealed interface Reward permits BlockRitualReward, CommandReward, EmotionReward, InvokeReward, OreColumnReward, RecipeReward, SpecialEffectReward {
     String type();                          // each subclass returns its own key
     void grant(NoteSource source);
     default boolean canGrant(NoteSource source) { return true; } // default implementation
@@ -23,6 +23,7 @@ public sealed interface Reward permits CommandReward, EmotionReward, RecipeRewar
             case "special_effect" -> SpecialEffectReward.CODEC;
             case "recipe"         -> RecipeReward.CODEC;
             case "ore_column"   -> OreColumnReward.CODEC;
+            case "invoke"         -> InvokeReward.CODEC;
             default -> throw new IllegalArgumentException("Unknown reward type: " + k);
         };
     }

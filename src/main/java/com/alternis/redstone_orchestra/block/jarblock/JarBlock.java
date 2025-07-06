@@ -2,6 +2,7 @@ package com.alternis.redstone_orchestra.block.jarblock;
 
 import com.alternis.redstone_orchestra.RedstoneOrchestra;
 import com.alternis.redstone_orchestra.item.HeartItem;
+import com.alternis.redstone_orchestra.item.NecklaceItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -53,6 +54,13 @@ public class JarBlock extends Block implements EntityBlock {
                         player.sendSystemMessage(Component.literal("Jar already contains a heart."));
                     }
                 }
+
+                else if (player.getMainHandItem().getItem() instanceof NecklaceItem) {
+                    NecklaceItem.bindToJar(player.getMainHandItem(), pos, level.dimension());
+                    player.sendSystemMessage(Component.literal("Necklace bound to jar at " + pos));
+                    return InteractionResult.SUCCESS;
+                }
+
 
                 // Remove heart (if empty-handed and jar has heart)
                 else if (held.isEmpty() && !jar.getHeartStack().isEmpty()) {

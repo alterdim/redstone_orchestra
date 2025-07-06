@@ -3,15 +3,11 @@ package com.alternis.redstone_orchestra.block.instrument.triangle;
 import com.alternis.redstone_orchestra.RedstoneOrchestra;
 import com.cstav.genshinstrument.block.partial.AbstractInstrumentBlock;
 import com.cstav.genshinstrument.block.partial.InstrumentBlockEntity;
-import com.cstav.genshinstrument.networking.GIPacketHandler;
-import com.cstav.genshinstrument.networking.OpenInstrumentPacketSender;
-import com.cstav.genshinstrument.networking.packet.instrument.s2c.OpenInstrumentPacket;
 import com.cstav.genshinstrument.networking.packet.instrument.util.InstrumentPacketUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.redstone.Redstone;
 
 public class TriangleBlock extends AbstractInstrumentBlock {
     public TriangleBlock(Properties pProperties) {
@@ -25,7 +21,7 @@ public class TriangleBlock extends AbstractInstrumentBlock {
 
     @Override
     public InstrumentBlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new TriangleBlockEntity(blockPos, blockState);
+        return new TriangleBlockEntityEntity(blockPos, blockState);
     }
 
 }

@@ -39,13 +39,11 @@ public class JarOverlay {
         BlockPos pos = bhr.getBlockPos();
         BlockEntity be = mc.level.getBlockEntity(pos);
         if (!(be instanceof JarBlockEntity jar)) return;
-        System.out.println("Overlay render event fired");
         GuiGraphics gui = event.getGuiGraphics();
         int x = 20;
         int y = 20;
 
         int anger_count = jar.get(Emotion.ANGER);
-        System.out.println("anger count: " + anger_count);
         int sadness_count = jar.get(Emotion.SADNESS);
         int joy_count = jar.get(Emotion.JOY);
 

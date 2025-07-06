@@ -42,7 +42,7 @@ public class JarBlockEntity extends BlockEntity {
 
         int currentTotal = HeartItem.getTotal(heartStack);
         if (currentTotal + qty > size) {
-            LOGGER.info("Too full! Cap: {}, Attempting to add {}, Current Total: {}", size, qty, currentTotal);
+            //LOGGER.info("Too full! Cap: {}, Attempting to add {}, Current Total: {}", size, qty, currentTotal);
             return false;
         }
 
@@ -160,6 +160,7 @@ public class JarBlockEntity extends BlockEntity {
         return findBlocksAround(block, 8, 2);
     }
 
+    /*
     @Deprecated
     public static JarBlockEntity findJarSameChunk(ServerPlayer player) {
         var chunk = player.level().getChunkAt(player.blockPosition());
@@ -168,6 +169,7 @@ public class JarBlockEntity extends BlockEntity {
         }
         return null;
     }
+    */
 
     private void onChanged() {
         setChanged(); // marks the BE as dirty for saving

@@ -24,7 +24,7 @@ public class ModEvents {
         {
             InstrumentPlayedEvent<NoteSound>.EntityInfo info = event.entityInfo().get();
             NoteSound note = event.sound();
-            Logger.getAnonymousLogger().log(Level.INFO, "InstrumentPlayedEvent: InstrumentPlayedEvent.NoteIdentifier: {0}", note.index);
+            //Logger.getAnonymousLogger().log(Level.INFO, "InstrumentPlayedEvent: InstrumentPlayedEvent.NoteIdentifier: {0}", note.index);
             var chunk = event.level().getChunkAt(info.entity.blockPosition());
             for (BlockEntity blockEntity : chunk.getBlockEntities().values()) {
                 if (blockEntity instanceof JarBlockEntity jar) {

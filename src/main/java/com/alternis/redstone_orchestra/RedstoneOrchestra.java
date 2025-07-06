@@ -1,11 +1,8 @@
 package com.alternis.redstone_orchestra;
 
 import com.alternis.redstone_orchestra.block.ModBlockEntities;
-import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
 import com.alternis.redstone_orchestra.block.ModBlocks;
-import com.alternis.redstone_orchestra.block.instrument.triangle.TriangleBlockEntity;
 import com.alternis.redstone_orchestra.init.ModSounds;
-import com.alternis.redstone_orchestra.item.HeartItem;
 import com.alternis.redstone_orchestra.item.ModItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.ChatFormatting;
@@ -13,16 +10,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -52,6 +43,7 @@ public class RedstoneOrchestra
             .displayItems((parameters, output) -> {
                 // ITEMS
                 output.accept(ZOMBIE_HEART_ITEM.get());
+                output.accept(NECKLACE_ITEM.get());
                 output.accept(CONDUCTING_BATON.get());
                 output.accept(MUSICAL_POWDER.get());
 

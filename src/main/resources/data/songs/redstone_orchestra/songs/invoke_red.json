@@ -1,0 +1,14 @@
+{
+  "pattern": [4, 1, 2],
+  "cost": { "anger": 5 },
+  "allowed_instruments": ["redstone_orchestra:electric_guitar"],
+  "rewards": [
+    {
+      "type": "invoke",
+      "entities": ["minecraft:blaze", "minecraft:ghast", "minecraft:witch"],
+      "min_spawn": 2,
+      "max_spawn": 6
+    }
+
+  ]
+}

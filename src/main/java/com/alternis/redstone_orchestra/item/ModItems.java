@@ -15,6 +15,7 @@ public class ModItems {
     public static final RegistryObject<Item> ZOMBIE_HEART_ITEM = ITEMS.register("zombie_heart", () -> new HeartItem(new Item.Properties(), 150));
 
     // TOOLS
+    public static final RegistryObject<Item> NECKLACE_ITEM = ITEMS.register("necklace", () -> new NecklaceItem(new Item.Properties()));
     public static final RegistryObject<Item> CONDUCTING_BATON = ITEMS.register("conducting_baton", () -> new ConductingBaton(new Item.Properties()));
 
     // INGREDIENTS

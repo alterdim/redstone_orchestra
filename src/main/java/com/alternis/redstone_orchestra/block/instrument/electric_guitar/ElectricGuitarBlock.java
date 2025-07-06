@@ -21,7 +21,7 @@ public class ElectricGuitarBlock extends AbstractInstrumentBlock {
 
     @Override
     public InstrumentBlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new ElectricGuitarBlockEntity(blockPos, blockState);
+        return new ElectricGuitarBlockEntityEntity(blockPos, blockState);
     }
 
 }

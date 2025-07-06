@@ -1,0 +1,23 @@
+{
+  "pattern": [4, 3, 2, 5, 4, 3, 2],
+  "cost": { "joy": 5 },
+  "allowed_instruments": ["redstone_orchestra:electric_guitar", "redstone_orchestra:triangle"],
+  "rewards": [
+    {
+      "type": "block_ritual",
+      "inputs": [
+        {
+          "id": "minecraft:iron_ore",
+          "Count": 3
+        },
+        {
+          "id": "minecraft:diamond_ore",
+          "Count": 3
+        }
+      ],
+      "output": {
+        "id": "redstone_orchestra:musical_ore"
+      }
+    }
+  ]
+}

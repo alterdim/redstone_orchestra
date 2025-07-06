@@ -1,11 +1,9 @@
 package com.alternis.redstone_orchestra.block.instrument;
 
 import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
-import com.cstav.genshinstrument.block.partial.AbstractInstrumentBlock;
 import com.cstav.genshinstrument.block.partial.InstrumentBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,11 +11,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nullable;
 
 
-public abstract class LinkableInstrumentBlock extends InstrumentBlockEntity {
+public abstract class LinkableInstrumentBlockEntity extends InstrumentBlockEntity {
 
     private BlockPos linkedJar;
 
-    public LinkableInstrumentBlock(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
+    public LinkableInstrumentBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
 

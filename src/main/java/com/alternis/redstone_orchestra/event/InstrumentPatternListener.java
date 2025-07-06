@@ -1,7 +1,6 @@
 package com.alternis.redstone_orchestra.event;
 
 import com.alternis.redstone_orchestra.RedstoneOrchestra;
-import com.alternis.redstone_orchestra.block.instrument.LinkableInstrumentBlock;
 import com.alternis.redstone_orchestra.data.Song;
 import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
 import com.alternis.redstone_orchestra.init.ModDatapackRegistries;
@@ -10,12 +9,10 @@ import com.alternis.redstone_orchestra.util.notesource.NoteSource;
 import com.alternis.redstone_orchestra.util.reward.Reward;
 import com.cstav.genshinstrument.event.NoteSoundPlayedEvent;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -42,10 +39,8 @@ public final class InstrumentPatternListener {
         /* logical-server only */
         if (ev.level().isClientSide) return;
 
-        /* only handle player-played notes */
-        if (!(ev.entityInfo().get().entity instanceof ServerPlayer player)) return;
-
         NoteSource source = NoteSource.from(ev);
+        //System.out.println(source.pos());
         String key = NoteSource.toKey(source);
 
 
@@ -59,17 +54,14 @@ public final class InstrumentPatternListener {
         String instrument_name = ev.soundMeta().instrumentId().toString();
 
         /* ---------------- iterate over all songs ---------------------- */
-        Registry<Song> songs = player.level()
-                .registryAccess()
-                .registryOrThrow(ModDatapackRegistries.SONGS);
+        Registry<Song> songs = ev.entityInfo().get().entity.level().registryAccess().registryOrThrow(ModDatapackRegistries.SONGS);
 
         for (Song song : songs) {
             if (!endsWith(buf, song.pattern()) || !song.allowedInstruments().contains(instrument_name)) continue;              // no match
-
-            JarBlockEntity jar = JarBlockEntity.findJarSameChunk(player);
+            System.out.println("Trying to grant song");
+            JarBlockEntity jar = source.jar();
             if (jar == null) {
-                player.sendSystemMessage(RedstoneOrchestra.text(
-                        "No emotion jar nearby!", ChatFormatting.GRAY));
+                source.sendMessage(ChatFormatting.RED + "No jar block entity found! Source is " + source.type());
                 return;
             }
 
@@ -78,27 +70,17 @@ public final class InstrumentPatternListener {
             /* ---------------- pattern + payment succeeded ------------- */
             for (Reward reward : song.rewards()) {
                 if (!reward.canGrant(source)) {
-                    player.sendSystemMessage(RedstoneOrchestra.text(
-                            "The notes got lost ...",
-                            ChatFormatting.DARK_RED));
-                    // play failure sound
-                    player.playNotifySound(
-                            SoundEvents.ANVIL_DESTROY,
-                            player.getSoundSource(),
-                            1.0f, 1.0f);
+                    source.sendMessage(ChatFormatting.RED + "You cannot grant this reward!");
                     return;
                 }
             }
 
             if (!jar.tryPay(toEnumMap(song.cost()))) {
-                player.sendSystemMessage(RedstoneOrchestra.text(
-                        "Not enough emotions!", ChatFormatting.DARK_RED));
+                source.sendMessage(ChatFormatting.RED + "You cannot pay this reward!");
                 continue;
             }
-
-            player.sendSystemMessage(RedstoneOrchestra.text("HIIII", ChatFormatting.GOLD));
             applyReward(song, source);
-            spawnSuccessParticles(player);
+            //spawnSuccessParticles(player);
             buf.clear();                       // optional: reset after success
             break;                             // one song per keystroke
         }
