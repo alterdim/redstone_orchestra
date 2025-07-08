@@ -2,8 +2,7 @@ package com.alternis.redstone_orchestra.client.gui;
 
 import com.alternis.redstone_orchestra.RedstoneOrchestra;
 import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
-import com.alternis.redstone_orchestra.util.Emotion;
-import com.mojang.blaze3d.vertex.PoseStack;
+import com.alternis.redstone_orchestra.data.Emotion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;

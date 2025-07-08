@@ -1,11 +1,10 @@
-package com.alternis.redstone_orchestra.util.reward;
+package com.alternis.redstone_orchestra.data.reward;
 
 import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
-import com.alternis.redstone_orchestra.util.notesource.NoteSource;
+import com.alternis.redstone_orchestra.data.notesource.NoteSource;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.registries.ForgeRegistries;

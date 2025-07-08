@@ -1,12 +1,11 @@
-package com.alternis.redstone_orchestra.util.reward;
+package com.alternis.redstone_orchestra.data.reward;
 
 import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
-import com.alternis.redstone_orchestra.util.notesource.NoteSource;
+import com.alternis.redstone_orchestra.data.notesource.NoteSource;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -14,8 +13,8 @@ import org.jline.utils.Log;
 
 import java.util.List;
 
-import static com.alternis.redstone_orchestra.RedstoneOrchestra.LOGGER;
 import static com.alternis.redstone_orchestra.block.ModBlocks.RECEPTACLE_BLOCK;
+import static com.alternis.redstone_orchestra.util.UtilFunc.setBlockWithEffect;
 import static net.minecraft.world.level.block.Blocks.*;
 
 public record SpecialEffectReward(List<String> effects) implements Reward {
@@ -66,17 +65,4 @@ public record SpecialEffectReward(List<String> effects) implements Reward {
         }
     }
 
-    private void setBlockWithEffect(ServerLevel lvl, BlockPos pos, Block block) {
-        SoundType soundType = block.getSoundType(block.defaultBlockState(), lvl, pos, null);
-        lvl.playSound(
-                null,                      // null = all nearby players hear it
-                pos,
-                soundType.getPlaceSound(), // correct "placement" sound
-                SoundSource.BLOCKS,
-                (soundType.getVolume() + 1.0F) / 2.0F,
-                soundType.getPitch() * 0.8F
-        );
-        lvl.levelEvent(2001, pos, Block.getId(block.defaultBlockState())); // block break particles with placement effect
-        lvl.setBlock(pos, block.defaultBlockState(), Block.UPDATE_ALL);
-    }
 }

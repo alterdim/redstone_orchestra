@@ -1,6 +1,9 @@
 {
   "pattern": [1, 2, 3],
-  "cost": { "anger": 1 },
+  "cost": [
+    { "type": "emotions", "emotions" : { "ANGER": 10, "JOY": 10  }},
+    { "type" : "blocks", "blocks": {"minecraft:stone": 5}}
+  ],
   "allowed_instruments": ["redstone_orchestra:triangle", "redstone_orchestra:electric_guitar", "genshinstrument:vintage_lyre"],
   "rewards": [
     { "type": "command", "commands": [ "say It works!" ] }

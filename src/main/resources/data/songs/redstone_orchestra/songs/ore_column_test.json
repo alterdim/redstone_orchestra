@@ -1,6 +1,9 @@
 {
   "pattern": [0, 1, 2],
-  "cost": { "anger": 1 },
+  "cost": [
+    { "type": "emotions", "emotions" : { "ANGER": 10, "JOY": 10  }},
+    { "type" : "blocks", "blocks": {"minecraft:stone": 8}}
+  ],
   "allowed_instruments": ["redstone_orchestra:triangle"],
   "rewards": [
     {

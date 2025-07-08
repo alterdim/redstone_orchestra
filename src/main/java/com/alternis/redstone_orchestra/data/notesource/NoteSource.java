@@ -1,4 +1,4 @@
-package com.alternis.redstone_orchestra.util.notesource;
+package com.alternis.redstone_orchestra.data.notesource;
 
 import com.alternis.redstone_orchestra.block.instrument.LinkableInstrumentBlockEntity;
 import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
@@ -10,7 +10,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
@@ -32,13 +31,10 @@ public sealed interface NoteSource permits NoteSource.PlayerSource, NoteSource.B
         return this.getClass().getSimpleName();
     }
 
-    @Nullable
     ServerLevel serverLevel();
 
-    @Nullable
     JarBlockEntity jar();
 
-    @Nullable
     void sendMessage(String message);
 
     record PlayerSource(UUID uuid) implements NoteSource {

@@ -1,6 +1,6 @@
 package com.alternis.redstone_orchestra.item;
 
-import com.alternis.redstone_orchestra.util.Emotion;
+import com.alternis.redstone_orchestra.data.Emotion;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;

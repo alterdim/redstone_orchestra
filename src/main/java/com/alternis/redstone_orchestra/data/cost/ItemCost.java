@@ -1,41 +1,34 @@
-package com.alternis.redstone_orchestra.util.reward;
+package com.alternis.redstone_orchestra.data.cost;
 
 import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
-import com.alternis.redstone_orchestra.util.notesource.NoteSource;
+import com.alternis.redstone_orchestra.data.notesource.NoteSource;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jline.utils.Log;
 
 import java.util.List;
-import java.util.Objects;
 
 import static com.alternis.redstone_orchestra.block.ModBlocks.AMP_BLOCK;
 import static com.alternis.redstone_orchestra.block.ModBlocks.CATALYST_BLOCK;
-import static net.minecraft.world.level.block.Blocks.*;
-import static net.minecraft.world.level.block.Blocks.COAL_ORE;
 import static net.minecraft.world.level.block.entity.HopperBlockEntity.getContainerAt;
 
-public record RecipeReward(List<ItemStack> inputs, List<ItemStack> outputs) implements Reward {
+public record ItemCost(List<ItemStack> inputs, List<ItemStack> outputs) implements Cost {
 
-    public static final Codec<RecipeReward> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ItemStack.CODEC.listOf().fieldOf("inputs").forGetter(RecipeReward::inputs),
-            ItemStack.CODEC.listOf().fieldOf("outputs").forGetter(RecipeReward::outputs)
-    ).apply(instance, RecipeReward::new));
+    public static final Codec<ItemCost> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            ItemStack.CODEC.listOf().fieldOf("inputs").forGetter(ItemCost::inputs),
+            ItemStack.CODEC.listOf().fieldOf("outputs").forGetter(ItemCost::outputs)
+    ).apply(instance, ItemCost::new));
 
     @Override
     public String type() {
         return "recipe";
     }
 
-    public boolean canGrant(NoteSource source) {
+    public boolean canPay(NoteSource source) {
         JarBlockEntity jar = source.jar();
         if (jar == null) return false;
         BlockPos catalyst = jar.findBlocksAround(CATALYST_BLOCK.get()).get(0);
@@ -55,7 +48,7 @@ public record RecipeReward(List<ItemStack> inputs, List<ItemStack> outputs) impl
     }
 
     @Override
-    public void grant(NoteSource source) {
+    public void pay(NoteSource source) {
         JarBlockEntity jar = source.jar();
         if (jar == null) return;
         BlockPos catalyst = jar.findBlocksAround(CATALYST_BLOCK.get()).get(0);

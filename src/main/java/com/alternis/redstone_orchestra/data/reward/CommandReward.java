@@ -1,15 +1,12 @@
-package com.alternis.redstone_orchestra.util.reward;
+package com.alternis.redstone_orchestra.data.reward;
 
-import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
-import com.alternis.redstone_orchestra.util.notesource.NoteSource;
+import com.alternis.redstone_orchestra.data.notesource.NoteSource;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 

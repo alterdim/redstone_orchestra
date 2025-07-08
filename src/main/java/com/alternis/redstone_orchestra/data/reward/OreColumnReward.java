@@ -1,6 +1,6 @@
-package com.alternis.redstone_orchestra.util.reward;
+package com.alternis.redstone_orchestra.data.reward;
 import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
-import com.alternis.redstone_orchestra.util.notesource.NoteSource;
+import com.alternis.redstone_orchestra.data.notesource.NoteSource;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.SoundType;
 import java.util.List;
 
 import static com.alternis.redstone_orchestra.block.ModBlocks.RECEPTACLE_BLOCK;
+import static com.alternis.redstone_orchestra.util.UtilFunc.setBlockWithEffect;
 
 public record OreColumnReward(List<ResourceLocation> blockIds, int minHeight, int maxHeight) implements Reward {
 
@@ -53,11 +54,5 @@ public record OreColumnReward(List<ResourceLocation> blockIds, int minHeight, in
         }
     }
 
-    private void setBlockWithEffect(ServerLevel lvl, BlockPos pos, Block block) {
-        SoundType sound = block.getSoundType(block.defaultBlockState(), lvl, pos, null);
-        lvl.playSound(null, pos, sound.getPlaceSound(), SoundSource.BLOCKS,
-                (sound.getVolume() + 1.0F) / 2.0F, sound.getPitch() * 0.8F);
-        lvl.levelEvent(2001, pos, Block.getId(block.defaultBlockState()));
-        lvl.setBlock(pos, block.defaultBlockState(), Block.UPDATE_ALL);
-    }
+
 }

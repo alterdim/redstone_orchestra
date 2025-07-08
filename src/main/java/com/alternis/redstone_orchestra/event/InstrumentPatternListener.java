@@ -4,9 +4,9 @@ import com.alternis.redstone_orchestra.RedstoneOrchestra;
 import com.alternis.redstone_orchestra.data.Song;
 import com.alternis.redstone_orchestra.block.jarblock.JarBlockEntity;
 import com.alternis.redstone_orchestra.init.ModDatapackRegistries;
-import com.alternis.redstone_orchestra.util.Emotion;
-import com.alternis.redstone_orchestra.util.notesource.NoteSource;
-import com.alternis.redstone_orchestra.util.reward.Reward;
+import com.alternis.redstone_orchestra.data.Emotion;
+import com.alternis.redstone_orchestra.data.notesource.NoteSource;
+import com.alternis.redstone_orchestra.data.reward.Reward;
 import com.cstav.genshinstrument.event.NoteSoundPlayedEvent;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
@@ -59,6 +59,7 @@ public final class InstrumentPatternListener {
         for (Song song : songs) {
             if (!endsWith(buf, song.pattern()) || !song.allowedInstruments().contains(instrument_name)) continue;              // no match
             System.out.println("Trying to grant song");
+
             JarBlockEntity jar = source.jar();
             if (jar == null) {
                 source.sendMessage(ChatFormatting.RED + "No jar block entity found! Source is " + source.type());
@@ -68,18 +69,7 @@ public final class InstrumentPatternListener {
 
 
             /* ---------------- pattern + payment succeeded ------------- */
-            for (Reward reward : song.rewards()) {
-                if (!reward.canGrant(source)) {
-                    source.sendMessage(ChatFormatting.RED + "You cannot grant this reward!");
-                    return;
-                }
-            }
-
-            if (!jar.tryPay(toEnumMap(song.cost()))) {
-                source.sendMessage(ChatFormatting.RED + "You cannot pay this reward!");
-                continue;
-            }
-            applyReward(song, source);
+            song.tryGrant(source);
             //spawnSuccessParticles(player);
             buf.clear();                       // optional: reset after success
             break;                             // one song per keystroke

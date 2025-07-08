@@ -1,14 +1,12 @@
 package com.alternis.redstone_orchestra.block.jarblock;
 
 import com.alternis.redstone_orchestra.item.HeartItem;
-import com.alternis.redstone_orchestra.util.Emotion;
+import com.alternis.redstone_orchestra.data.Emotion;
 import com.cstav.genshinstrument.event.InstrumentPlayedEvent;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -31,7 +29,7 @@ public class JarBlockEntity extends BlockEntity {
         LOGGER.info("JarBlockEntity initialized at {}", pos);
     }
 
-    public void onInstrumentPlayed(InstrumentPlayedEvent event) {
+    public void onInstrumentPlayed(InstrumentPlayedEvent<?> event) {
         add(Emotion.ANGER, 1);
         add(Emotion.SADNESS, 1);
         add(Emotion.JOY, 1);
@@ -42,7 +40,6 @@ public class JarBlockEntity extends BlockEntity {
 
         int currentTotal = HeartItem.getTotal(heartStack);
         if (currentTotal + qty > size) {
-            //LOGGER.info("Too full! Cap: {}, Attempting to add {}, Current Total: {}", size, qty, currentTotal);
             return false;
         }
 
@@ -55,26 +52,12 @@ public class JarBlockEntity extends BlockEntity {
         return heartStack.isEmpty() ? 0 : HeartItem.getEmotion(heartStack, emotion);
     }
 
-    public EnumMap<Emotion, Integer> getCounts() {
-        return heartStack.isEmpty() ? new EnumMap<>(Emotion.class) : HeartItem.getAllEmotions(heartStack);
+    public boolean canPay(Map<Emotion, Integer> cost) {
+        if (heartStack.isEmpty()) return false;
+        return HeartItem.hasAll(heartStack, cost);
     }
 
-    public int remove(Emotion emotion, int qty) {
-        if (heartStack.isEmpty()) return 0;
-        int current = HeartItem.getEmotion(heartStack, emotion);
-        int removed = Math.min(current, Math.max(0, qty));
-        if (removed > 0) {
-            HeartItem.addEmotion(heartStack, emotion, -removed);
-            onChanged();
-        }
-        return removed;
-    }
-
-    public boolean consume(Map<Emotion, Integer> required) {
-        return !heartStack.isEmpty() && HeartItem.tryConsume(heartStack, required);
-    }
-
-    public boolean tryPay(EnumMap<Emotion, Integer> cost) {
+    public boolean tryPay(Map<Emotion, Integer> cost) {
         if (heartStack.isEmpty()) return false;
         if (!HeartItem.hasAll(heartStack, cost)) return false;
         HeartItem.tryConsume(heartStack, cost);
