@@ -1,6 +1,7 @@
 package com.alternis.redstone_orchestra.block;
 
 import com.alternis.redstone_orchestra.RedstoneOrchestra;
+import com.alternis.redstone_orchestra.block.accidental_ore.AccidentalOreBlock;
 import com.alternis.redstone_orchestra.block.instrument.electric_guitar.ElectricGuitarBlock;
 import com.alternis.redstone_orchestra.block.instrument.triangle.TriangleBlock;
 import com.alternis.redstone_orchestra.block.jarblock.JarBlock;
@@ -21,6 +22,14 @@ import static com.alternis.redstone_orchestra.item.ModItems.ITEMS;
 public class ModBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, RedstoneOrchestra.MODID);
+
+    public static final RegistryObject<Block> ACCIDENTAL_ORE_SHARP_BLOCK =
+            registerBlock("accidental_ore_sharp_block", () -> new AccidentalOreBlock(AccidentalOreBlock.Type.SHARP));
+
+    public static final RegistryObject<Block> ACCIDENTAL_ORE_FLAT_BLOCK = BLOCKS.register("accidental_ore_flat_block",
+            () -> new AccidentalOreBlock(AccidentalOreBlock.Type.FLAT));
+
+
     public static final RegistryObject<Block> JAR_BLOCK =
             registerBlock("jar_block", () -> new JarBlock(defaultProps()));
 
@@ -42,6 +51,9 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Item> JAR_BLOCK_ITEM = registerBlockItem(JAR_BLOCK);
+
+    public static final RegistryObject<Item> ACCIDENTAL_ORE_SHARP_BLOCK_ITEM = registerBlockItem(ACCIDENTAL_ORE_SHARP_BLOCK);
+    public static final RegistryObject<Item> ACCIDENTAL_ORE_FLAT_BLOCK_ITEM = registerBlockItem(ACCIDENTAL_ORE_FLAT_BLOCK);
 
     public static final RegistryObject<Item> TRIANGLE_BLOCK_ITEM = registerBlockItem(TRIANGLE_BLOCK);
     public static final RegistryObject<Item> ELECTRIC_GUITAR_BLOCK_ITEM = registerBlockItem(ELECTRIC_GUITAR_BLOCK);

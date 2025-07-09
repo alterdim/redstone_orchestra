@@ -47,6 +47,9 @@ public class RedstoneOrchestra
                 output.accept(CONDUCTING_BATON.get());
                 output.accept(MUSICAL_POWDER.get());
 
+                // ORE
+                output.accept(ACCIDENTAL_ORE_SHARP_BLOCK_ITEM.get());
+                output.accept(ACCIDENTAL_ORE_FLAT_BLOCK_ITEM.get());
 
                 // INSTRUMENTS
                 output.accept(TRIANGLE_BLOCK_ITEM.get());

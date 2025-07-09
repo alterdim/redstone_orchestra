@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.server.ServerLifecycleHooks;
@@ -37,7 +38,20 @@ public sealed interface NoteSource permits NoteSource.PlayerSource, NoteSource.B
 
     void sendMessage(String message);
 
+    default boolean isPlayerSource() {
+        return false;
+    }
+
     record PlayerSource(UUID uuid) implements NoteSource {
+
+        public Player getPlayer() {
+            return ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayer(uuid);
+        }
+
+        public boolean isPlayerSource() {
+            return true;
+        }
+
         @Override
         public @Nullable BlockPos pos() {
             ServerPlayer player = ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayer(uuid);

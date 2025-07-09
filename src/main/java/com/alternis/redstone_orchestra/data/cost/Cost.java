@@ -22,6 +22,7 @@ public sealed interface Cost permits BlockCost, EmotionCost, ItemCost {
         return switch (k) {
             case "emotions"        -> EmotionCost.CODEC;
             case "blocks"          -> BlockCost.CODEC;
+            case "items"           -> ItemCost.CODEC;
             default -> throw new IllegalArgumentException("Unknown cost type: " + k);
         };
     }

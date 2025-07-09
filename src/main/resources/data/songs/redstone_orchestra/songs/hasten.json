@@ -1,0 +1,25 @@
+{
+  "pattern": [1, 9],
+  "cost": [
+    {
+      "type": "emotions",
+      "emotions": { "SADNESS": 1}
+    }
+  ],
+  "allowed_instruments": ["genshinstrument:vintage_lyre"],
+  "rewards": [
+    {
+      "type": "effect",
+      "effect": "minecraft:speed",
+      "level": 1,
+      "duration": 60
+    },
+    {
+      "type": "effect",
+      "effect": "minecraft:haste",
+      "level": 1,
+      "duration": 60
+    }
+
+  ]
+}

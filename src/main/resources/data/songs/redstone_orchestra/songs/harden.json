@@ -1,0 +1,22 @@
+{
+  "pattern": [1, 10],
+  "cost": [
+    {
+      "type": "emotions",
+      "emotions": { "SADNESS": 1}
+    }
+  ],
+  "allowed_instruments": ["genshinstrument:vintage_lyre"],
+  "rewards": [
+    {
+      "type": "replace_block",
+      "blockMap": {
+        "minecraft:water": "minecraft:stone",
+        "minecraft:lava": "minecraft:obsidian",
+        "minecraft:ice": "minecraft:packed_ice",
+        "minecraft:andesite": "minecraft:polished_andesite"
+      }
+    }
+
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "pattern": [1,1,1,0],
+  "cost": [
+    {
+      "type": "emotions",
+      "emotions": { "ANGER": 10, "JOY": 10 }
+    },
+    {
+      "type": "items",
+      "items": [
+        { "id": "minecraft:sugar", "Count": 1 }
+      ]
+    }
+  ],
+  "allowed_instruments": ["redstone_orchestra:triangle"],
+  "rewards": [
+    {
+      "type": "items",
+      "items": [
+        { "id": "minecraft:redstone", "Count": 3 }
+      ]
+    }
+  ]
+}

@@ -12,6 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -32,15 +33,23 @@ public record BlockReward(Map<Block, Integer> blocks) implements Reward {
     @Override
     public void grant(NoteSource source) {
         List<BlockPos> amps = source.jar().findBlocksAround(AMP_BLOCK.get());
-        ArrayList<BlockPos> above_amps = new ArrayList<>(amps.stream()
+        List<BlockPos> aboveAmps = amps.stream()
                 .map(BlockPos::above)
-                .toList());
-        for (Map.Entry<Block, Integer> entry : blocks.entrySet()) {
-            Block block = entry.getKey();
-            UtilFunc.setBlockWithEffect(source.serverLevel(), above_amps.get(0), block);
-            above_amps.remove(0);
+                .toList();
+        if (blocks.values().stream().mapToInt(i -> i).sum() > aboveAmps.size()) {
+            return;
         }
 
+        Iterator<BlockPos> it = aboveAmps.iterator();
+        for (var entry : blocks.entrySet()) {
+            Block block = entry.getKey();
+            int count    = entry.getValue();
+            for (int i = 0; i < count; i++) {
+                if (!it.hasNext()) break;
+                BlockPos pos = it.next();
+                UtilFunc.setBlockWithEffect(source.serverLevel(), pos, block);
+            }
+        }
     }
 
     @Override

@@ -1,6 +1,17 @@
 {
   "pattern": [4, 1, 2],
-  "cost": { "anger": 5 },
+  "cost": [
+    {
+      "type": "emotions",
+      "emotions": { "ANGER": 10, "JOY": 10 }
+    },
+    {
+      "type": "items",
+      "items": [
+        { "id": "minecraft:sugar", "Count": 1 }
+      ]
+    }
+  ],
   "allowed_instruments": ["redstone_orchestra:electric_guitar"],
   "rewards": [
     {

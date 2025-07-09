@@ -1,8 +1,0 @@
-{
-  "pattern": [4, 3, 2, 5, 4, 3, 2],
-  "cost": { "joy": 5 },
-  "allowed_instruments": ["redstone_orchestra:triangle"],
-  "rewards": [
-    { "type": "recipe", "inputs" : [{ "id": "minecraft:redstone", "Count": 3 }, {"id":  "minecraft:sugar", "Count":  1}], "outputs": [{ "id": "redstone_orchestra:musical_powder", "Count": 3 }], "count": 1}
-  ]
-}

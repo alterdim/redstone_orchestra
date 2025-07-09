@@ -16,64 +16,51 @@ import static com.alternis.redstone_orchestra.block.ModBlocks.AMP_BLOCK;
 import static com.alternis.redstone_orchestra.block.ModBlocks.CATALYST_BLOCK;
 import static net.minecraft.world.level.block.entity.HopperBlockEntity.getContainerAt;
 
-public record ItemCost(List<ItemStack> inputs, List<ItemStack> outputs) implements Cost {
+public record ItemCost(List<ItemStack> items) implements Cost {
 
     public static final Codec<ItemCost> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ItemStack.CODEC.listOf().fieldOf("inputs").forGetter(ItemCost::inputs),
-            ItemStack.CODEC.listOf().fieldOf("outputs").forGetter(ItemCost::outputs)
+            ItemStack.CODEC.listOf().fieldOf("items").forGetter(ItemCost::items)
     ).apply(instance, ItemCost::new));
 
     @Override
     public String type() {
-        return "recipe";
+        return "items";
     }
 
     public boolean canPay(NoteSource source) {
         JarBlockEntity jar = source.jar();
-        if (jar == null) return false;
-        BlockPos catalyst = jar.findBlocksAround(CATALYST_BLOCK.get()).get(0);
-        BlockPos amp = jar.findBlocksAround(AMP_BLOCK.get()).get(0);
-        if (catalyst == null || amp == null) {
-            Log.warn("No catalyst or amp block found for RecipeReward at {}", jar.getBlockPos());
+        List<BlockPos> catalysts = jar.findBlocksAround(CATALYST_BLOCK.get());
+        if (catalysts.isEmpty()) {
+            Log.warn("No catalyst block found for ItemCost at {}", jar.getBlockPos());
             return false;
         }
-        Container outputContainer = getContainerAt(source.serverLevel(), amp.above());
+        BlockPos catalyst = catalysts.get(0);
         ServerLevel level = source.serverLevel();
         Container container = getContainerAt(level, catalyst.above());
-        if (container == null || outputContainer == null) {
+        if (container == null) {
             Log.warn("No container found at catalyst or amp block for RecipeReward at {}", jar.getBlockPos());
             return false;
         }
-        return hasRequiredItems(container, inputs) && hasOutputSpace(outputContainer, outputs);
+        return hasRequiredItems(container, items);
     }
 
     @Override
     public void pay(NoteSource source) {
         JarBlockEntity jar = source.jar();
-        if (jar == null) return;
         BlockPos catalyst = jar.findBlocksAround(CATALYST_BLOCK.get()).get(0);
-        BlockPos amp = jar.findBlocksAround(AMP_BLOCK.get()).get(0);
-        if (catalyst == null || amp == null) {
-            Log.warn("No catalyst or amp block found for RecipeReward at {}", jar.getBlockPos());
+        if (catalyst == null) {
+            Log.warn("No catalyst block found for RecipeReward at {}", jar.getBlockPos());
             return;
         }
 
         ServerLevel level = source.serverLevel();
         Container container = getContainerAt(level, catalyst.above());
-        Container outputContainer = getContainerAt(level, amp.above());
-
-        if (!hasRequiredItems(container, inputs)) {
+        if (!hasRequiredItems(container, items)) {
             Log.warn("Not enough items in container for RecipeReward at {}", jar.getBlockPos());
             return;
         }
 
-        consumeItems(container, inputs);
-        for (ItemStack output : outputs) {
-            if (!output.isEmpty()) {
-                insertItem(outputContainer, output.copy());
-            }
-        }
-
+        consumeItems(container, items);
     }
 
     private boolean hasRequiredItems(Container container, List<ItemStack> required) {
@@ -107,54 +94,5 @@ public record ItemCost(List<ItemStack> inputs, List<ItemStack> outputs) implemen
         }
     }
 
-    private void insertItem(Container container, ItemStack stack) {
-        for (int i = 0; i < container.getContainerSize(); i++) {
-            ItemStack slot = container.getItem(i);
-            if (slot.isEmpty()) {
-                container.setItem(i, stack);
-                return;
-            } else if (ItemStack.isSameItemSameTags(slot, stack) && slot.getCount() < slot.getMaxStackSize()) {
-                int space = slot.getMaxStackSize() - slot.getCount();
-                int toMove = Math.min(space, stack.getCount());
-                slot.grow(toMove);
-                stack.shrink(toMove);
-                if (stack.isEmpty()) return;
-            }
-        }
-    }
 
-    private boolean hasOutputSpace(Container container, List<ItemStack> outputs) {
-        // Clone a working copy of the container to simulate insertion
-        ItemStack[] simulated = new ItemStack[container.getContainerSize()];
-        for (int i = 0; i < simulated.length; i++) {
-            simulated[i] = container.getItem(i).copy();
-        }
-
-        for (ItemStack output : outputs) {
-            if (output.isEmpty()) continue;
-
-            int remaining = output.getCount();
-
-            // Try to merge output into simulated container
-            for (int i = 0; i < simulated.length; i++) {
-                ItemStack slot = simulated[i];
-
-                if (slot.isEmpty()) {
-                    simulated[i] = output.copy();
-                    remaining = 0;
-                    break;
-                } else if (ItemStack.isSameItemSameTags(slot, output)) {
-                    int space = slot.getMaxStackSize() - slot.getCount();
-                    int toInsert = Math.min(space, remaining);
-                    simulated[i].grow(toInsert);
-                    remaining -= toInsert;
-                    if (remaining <= 0) break;
-                }
-            }
-
-            if (remaining > 0) return false; // not enough space
-        }
-
-        return true;
-    }
 }
