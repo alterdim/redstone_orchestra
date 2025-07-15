@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "redstone_orchestra:block/accidental_ore_flat_block"
-  }
-}

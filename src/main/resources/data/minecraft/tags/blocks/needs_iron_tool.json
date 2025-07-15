@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "redstone_orchestra:accidental_ore_flat_block",
-    "redstone_orchestra:accidental_ore_sharp_block"
-  ]
-}

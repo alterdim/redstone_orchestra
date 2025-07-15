@@ -1,0 +1,4 @@
+// 1.20.1	2025-07-15T22:55:51.9005174	Registries
+5538f964aa36d19d89142ae24fb697fce76f1b7f data/redstone_orchestra/forge/biome_modifier/add_accidental_ore.json
+ba60e7372c53d24e97111489906d6e51ca10adec data/redstone_orchestra/worldgen/configured_feature/accidental_ore.json
+fefc2a3e8ec73842f4e9e1ef1bf5b70e08a9b58d data/redstone_orchestra/worldgen/placed_feature/accidental_ore_placed.json

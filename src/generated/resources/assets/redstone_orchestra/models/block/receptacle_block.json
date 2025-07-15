@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "redstone_orchestra:block/receptacle_block_end",
+    "side": "redstone_orchestra:block/receptacle_block_side"
+  }
+}

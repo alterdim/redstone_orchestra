@@ -1,0 +1,3 @@
+// 1.20.1	2025-07-12T00:08:26.7874222	Tags for minecraft:block mod id redstone_orchestra
+b1cf7068b66c3dc3d618182a3f13a09b43406c61 data/minecraft/tags/blocks/mineable/pickaxe.json
+4d0d404d6c49e9843afec4d4d9657bae65fc8eff data/minecraft/tags/blocks/needs_iron_tool.json

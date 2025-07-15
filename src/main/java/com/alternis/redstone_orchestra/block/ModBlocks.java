@@ -8,6 +8,7 @@ import com.alternis.redstone_orchestra.block.jarblock.JarBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -41,13 +42,13 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> RECEPTACLE_BLOCK =
-            registerBlock("receptacle_block", () -> new Block(defaultProps()));
+            registerBlock("receptacle_block", () -> new RotatedPillarBlock(defaultProps()));
 
     public static final RegistryObject<Block> CATALYST_BLOCK =
-            registerBlock("catalyst_block", () -> new Block(defaultProps()));
+            registerBlock("catalyst_block", () -> new RotatedPillarBlock(defaultProps()));
 
     public static final RegistryObject<Block> AMP_BLOCK =
-            registerBlock("amp_block", () -> new Block(defaultProps()));
+            registerBlock("amp_block", () -> new RotatedPillarBlock(defaultProps()));
 
 
     public static final RegistryObject<Item> JAR_BLOCK_ITEM = registerBlockItem(JAR_BLOCK);

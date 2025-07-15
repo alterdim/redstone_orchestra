@@ -20,6 +20,8 @@ public class ModItems {
 
     // INGREDIENTS
     public static final RegistryObject<Item> MUSICAL_POWDER = ITEMS.register("musical_powder", () -> new MusicalPowderItem(new Item.Properties()));
+    public static final RegistryObject<Item> DOREMI = ITEMS.register("doremi", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FASOLA = ITEMS.register("fasola", () -> new Item(new Item.Properties()));
 
     public static void register(final IEventBus bus) {
         ITEMS.register(bus);

@@ -4,12 +4,6 @@
     {
       "type": "emotions",
       "emotions": { "ANGER": 10, "JOY": 10 }
-    },
-    {
-      "type": "items",
-      "items": [
-        { "id": "minecraft:sugar", "Count": 1 }
-      ]
     }
   ],
   "allowed_instruments": ["redstone_orchestra:electric_guitar"],

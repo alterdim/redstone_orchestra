@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "redstone_orchestra:block/catalyst_block_end",
+    "side": "redstone_orchestra:block/catalyst_block_side"
+  }
+}

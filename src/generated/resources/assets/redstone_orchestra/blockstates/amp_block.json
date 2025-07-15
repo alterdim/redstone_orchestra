@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "redstone_orchestra:block/amp_block_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "redstone_orchestra:block/amp_block"
+    },
+    "axis=z": {
+      "model": "redstone_orchestra:block/amp_block_horizontal",
+      "x": 90
+    }
+  }
+}
