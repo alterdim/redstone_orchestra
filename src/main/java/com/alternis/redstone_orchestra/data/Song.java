@@ -29,6 +29,7 @@ public record Song(
      */
     public void tryGrant(NoteSource source) {
         if (canGrant(source)) {
+            System.out.println("Granting song with pattern: " + pattern);
             pay(source);
             for (Reward reward : rewards) {
                 reward.grant(source);
@@ -55,8 +56,10 @@ public record Song(
                 return false;
             }
         }
+        System.out.println("Can pay everything.");
         for (Reward reward : rewards) {
             if (!reward.canGrant(source)) {
+                System.out.println("Cannot grant reward: " + reward.type());
                 return false;
             }
         }

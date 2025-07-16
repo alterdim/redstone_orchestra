@@ -18,11 +18,12 @@ import java.util.Map;
 
 import static com.alternis.redstone_orchestra.block.ModBlocks.AMP_BLOCK;
 
-public record BlockReward(Map<Block, Integer> blocks) implements Reward {
+public record BlockReward(Map<Block, Integer> blocks, int height) implements Reward {
 
     public static final Codec<BlockReward> CODEC = RecordCodecBuilder.create(i -> i.group(
             Codec.unboundedMap(CodecHelper.BLOCK_CODEC, Codec.INT)
-                    .fieldOf("blocks").forGetter(BlockReward::blocks)
+                    .fieldOf("blocks").forGetter(BlockReward::blocks), // then, optional int field that defaults to 0:
+            Codec.INT.optionalFieldOf("height", 1).forGetter(BlockReward::height)
     ).apply(i, BlockReward::new));
 
     @Override
@@ -33,9 +34,12 @@ public record BlockReward(Map<Block, Integer> blocks) implements Reward {
     @Override
     public void grant(NoteSource source) {
         List<BlockPos> amps = source.jar().findBlocksAround(AMP_BLOCK.get());
-        List<BlockPos> aboveAmps = amps.stream()
-                .map(BlockPos::above)
-                .toList();
+        // get positions "height" above amps, minimum is 1:
+        List<BlockPos> aboveAmps = new ArrayList<>();
+        for (BlockPos pos : amps) {
+            aboveAmps.add(pos.above(height));
+        }
+
         if (blocks.values().stream().mapToInt(i -> i).sum() > aboveAmps.size()) {
             return;
         }

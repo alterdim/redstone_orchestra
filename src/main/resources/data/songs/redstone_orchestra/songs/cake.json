@@ -1,0 +1,19 @@
+{
+  "pattern": [17, 16, 15, 15, 16],
+  "cost": [
+    {
+      "type": "emotions",
+      "emotions": { "JOY": 1}
+    }
+  ],
+  "allowed_instruments": ["redstone_orchestra:electric_guitar"],
+  "rewards": [
+    {
+      "type": "replace_block",
+      "blockMap": {
+        "minecraft:stone": "minecraft:cake"
+      }
+    }
+
+  ]
+}

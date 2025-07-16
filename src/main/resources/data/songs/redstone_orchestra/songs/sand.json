@@ -1,0 +1,20 @@
+{
+  "pattern": [1, 8, 2, 9, 3, 10, 17],
+  "cost": [
+    {
+      "type": "emotions",
+      "emotions": { "JOY": 1}
+    }
+  ],
+  "allowed_instruments": ["redstone_orchestra:electric_guitar"],
+  "rewards": [
+    {
+      "type": "blocks",
+      "blocks" : {
+        "minecraft:sand": 8
+      },
+      "height": 8
+    }
+
+  ]
+}
